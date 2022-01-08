@@ -6,7 +6,7 @@
   </h4>
   <span>
       <button
-        *ngIf="category" 
+        *ngIf="!isNew" 
         class="btn btn-small red"
         (click)="deleteCategory()">
         <i class="material-icons">delete</i>
