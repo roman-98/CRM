@@ -12,7 +12,7 @@
             type="email"
             [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
           >
-          <label for="email">Email:</label>
+          <label for="email">Email</label>
           <span 
             class="helper-text red-text"
             *ngIf="form.get('email').invalid && form.get('email').touched"
@@ -28,7 +28,7 @@
             formControlName="password"
             [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}" 
           >
-          <label for="password">Пароль:</label>
+          <label for="password">Password</label>
           <span 
             class="helper-text red-text"
             *ngIf="form.get('password').invalid && form.get('password').touched"
