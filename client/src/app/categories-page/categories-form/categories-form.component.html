@@ -5,11 +5,14 @@
       {{isNew ? 'Створити' : 'Редагувати'}} категорію
   </h4>
   <span>
-      <button class="btn btn-small red"(click)="deleteCategory()"></button>
+      <button
+        *ngIf="category" 
+        class="btn btn-small red"
+        (click)="deleteCategory()">
         <i class="material-icons">delete</i>
       </button>
     </span>
-</div>
+  </div>
 
 <div class="row">
   <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
