@@ -2,28 +2,42 @@
   <div class="col s12">
       <div class="page-subtitle">
           <h4>Позиції:</h4>
-          <button class="waves-effect waves-light btn grey darken-1 btn-small modal-trigger" data-target="create-modal">
+          <button 
+             class="waves-effect waves-light btn grey darken-1 btn-small" 
+             (click)="onAddPosition()" 
+             >
               Додати позицію
           </button>
       </div>
-
-      <div class="collection">
-          <a class="collection-item collection-item-icon">
+  <div *ngIf="!loading; else loader">
+      <div class="collection" *ngIf="positions.length !== 0; else empty">
+          <a
+            *ngFor="let position of positions" 
+            class="collection-item collection-item-icon"
+            (click)="onSelectPosition(position)"
+          >
               <span>
-                  Кава <strong>15 грн.</strong>
+                  {{position.name}} <strong>{{position.cost}} грн.</strong>
               </span>
               <span>
                   <i class="material-icons">delete</i>
               </span>
           </a>
       </div>
+      <ng-template #empty>
+          <div class="center">В цій категорії ще немає позицій</div>
+      </ng-template>
+    </div>
+    <ng-template #loader>
+        <app-loader></app-loader>        
+    </ng-template>
   </div>
 </div>
 
 
-<div id="create-modal" class="modal">
+<div class="modal" #modal>
   <div class="modal-content">
-      <h4 class="mb1">Добавити позицію</h4>
+      <h4 class="mb1">Додати позицію</h4>
       <div class="input-field">
           <input id="pos-name" type="text" required>
           <label for="pos-name">Назва</label>
@@ -34,7 +48,7 @@
       </div>
   </div>
   <div class="modal-footer">
-      <a href="#!" class="modal-action waves-effect waves-black btn-flat">Скасувати</a>
+      <button type="button" (click)="onCancel()" class="modal-action waves-effect waves-black btn-flat">Скасувати</button>
       <button class="modal-action btn waves-effect">Зберегти</button>
   </div>
 </div>
