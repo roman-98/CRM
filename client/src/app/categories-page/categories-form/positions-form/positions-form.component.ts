@@ -5,6 +5,7 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './positions-form.component.html',
   styleUrls: ['./positions-form.component.css']
 })
+
 export class PositionsFormComponent implements OnInit {
   @Input('categoryId') categoryId: string
 
