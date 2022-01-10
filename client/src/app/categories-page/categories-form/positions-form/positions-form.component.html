@@ -20,7 +20,7 @@
                   {{position.name}} <strong>{{position.cost}} грн.</strong>
               </span>
               <span>
-                  <i class="material-icons">delete</i>
+                  <i class="material-icons" (click)="onDeletePosition($event, position)">delete</i>
               </span>
           </a>
       </div>
@@ -35,20 +35,58 @@
 </div>
 
 
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 <div class="modal" #modal>
   <div class="modal-content">
       <h4 class="mb1">Додати позицію</h4>
       <div class="input-field">
-          <input id="pos-name" type="text" required>
+          <input 
+            formControlName="name"         
+            id="pos-name" 
+            type="text"
+            [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+          >
           <label for="pos-name">Назва</label>
+        <span 
+          class="helper-text red-text"
+          *ngIf="form.get('name').invalid && form.get('name').touched"  
+        >
+            Поле назви не повинно бути пустим.
+        </span>
       </div>
       <div class="input-field">
-          <input id="pos-cost" type="text" required>
+          <input
+          formControlName="cost" 
+          id="pos-cost" 
+          type="number"
+          min="25"
+          [ngClass]="{'invalid': form.get('cost').invalid && form.get('cost').touched}" 
+          >
           <label for="pos-cost">Ціна</label>
+          <span 
+          class="helper-text red-text"
+          *ngIf="form.get('cost').invalid && form.get('cost').touched"  
+        >
+            Введіть правильну ціну. Мінімальне значення 25.
+        </span>
       </div>
   </div>
   <div class="modal-footer">
-      <button type="button" (click)="onCancel()" class="modal-action waves-effect waves-black btn-flat">Скасувати</button>
-      <button class="modal-action btn waves-effect">Зберегти</button>
+      <button 
+        type="button" 
+        (click)="onCancel()" 
+        class="modal-action waves-effect waves-black btn-flat"
+        [disabled]="form.disabled"
+      >
+        Скасувати
+      </button>
+      <button 
+        class="modal-action btn waves-effect" 
+        type="submit"
+        [disabled]="form.invalid || form.disabled"
+      >
+        Зберегти
+      </button>
   </div>
 </div>
+</form>
