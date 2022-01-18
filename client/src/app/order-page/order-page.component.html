@@ -1,6 +1,11 @@
 <div class="page-title">
-  <h4>Замовлення</h4>
-  <button class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">
+  <h4 *ngIf="isRoot">Замовлення</h4>
+    <h4 *ngIf="!isRoot">
+        <a routerLink="/order">Замовлення</a>
+        <i class="material-icons">keyboard_arrow_right</i>
+        Створити замовлення
+    </h4>
+  <button class="waves-effect btn grey darken-1" (click)="open()">
       Завершити
   </button>
 </div>
@@ -9,7 +14,7 @@
 <router-outlet></router-outlet>
 
 
-<div id="explore-order" class="modal modal-fixed-footer">
+<div #modal class="modal modal-fixed-footer">
   <div class="modal-content">
       <h4 class="mb1">Ваше замовлення</h4>
       <table class="highlight">
@@ -49,7 +54,13 @@
       </div>
   </div>
   <div class="modal-footer">
-      <a href="#!" class="modal-action waves-effect waves-black btn-flat">Відмінити</a>
-      <button class="modal-action btn waves-effect">Підтвердити</button>
+      <button 
+        class="modal-action waves-effect waves-black btn-flat"
+        (click)="cancel()"
+      >Відмінити</button>
+      <button 
+        class="modal-action btn waves-effect"
+        (click)="submit()"
+      >Підтвердити</button>
   </div>
 </div>
