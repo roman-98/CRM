@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+import {map, Observable, switchMap} from 'rxjs';
+import {Position} from 'src/app/shared/layouts/interfaces';
+import {PositionsService} from 'src/app/shared/layouts/services/positions.service';
+import {OrderService} from '../order.service';
 
 @Component({
   selector: 'app-order-positions',
@@ -7,9 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderPositionsComponent implements OnInit {
 
-  constructor() { }
+  positions$: Observable<Position[]>
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute,
+              private positionsService: PositionsService,
+              private order: OrderService) {
+
+  }
+
+  ngOnInit() {
+    this.positions$ = this.route.params
+      .pipe(
+        switchMap(
+          (params: Params) => {
+            return this.positionsService.fetch(params['id'])
+          }
+        ),
+        map(
+          (positions: Position[]) => {
+            return positions.map(position => {
+              position.quantity = 1
+              return position
+            })
+          }
+        )
+      )
+  }
+
+  addToOrder(position: Position) {
+    console.log(position)
+    this.order.add(position)
   }
 
 }
