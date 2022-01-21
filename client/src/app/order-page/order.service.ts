@@ -2,7 +2,8 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class OrderService {
-  add() {
+
+  add(position: any) {
 
   }
 
@@ -13,4 +14,5 @@ export class OrderService {
   close() {
     
   }
+
 }
