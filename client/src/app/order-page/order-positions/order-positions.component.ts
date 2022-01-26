@@ -40,7 +40,6 @@ export class OrderPositionsComponent implements OnInit {
   }
 
   addToOrder(position: Position) {
-    console.log(position)
     this.order.add(position)
   }
 
