@@ -16,7 +16,7 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   isRoot: boolean
 
   constructor(private router: Router,
-              private order: OrderService) {
+              public order: OrderService) {
   }
 
   ngOnInit() {
