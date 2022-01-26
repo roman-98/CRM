@@ -1,7 +1,7 @@
 <div class="page-title">
-  <h4 *ngIf="isRoot">Категорії</h4>
+  <h4 *ngIf="isRoot">Замовлення</h4>
     <h4 *ngIf="!isRoot">
-        <a routerLink="/order">Категорії</a>
+        <a routerLink="/order">Замовлення</a>
         <i class="material-icons">keyboard_arrow_right</i>
         Створити замовлення
     </h4>
@@ -36,7 +36,7 @@
               <td>{{item.name}}</td>
               <td>{{item.quantity}}</td>
               <td>{{item.cost}}</td>
-              <td><i class="material-icons pointer">delete</i></td>
+              <td><i class="material-icons pointer" (click)="removePosition(item)">delete</i></td>
           </tr>
           </tbody>
       </table>
@@ -52,6 +52,7 @@
       <button 
         class="modal-action btn waves-effect"
         (click)="submit()"
+        [disabled]="order.list.length === 0"
       >Підтвердити</button>
   </div>
 </div>
